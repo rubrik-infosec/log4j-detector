@@ -1,3 +1,19 @@
+# Rubrik-Usage
+```
+git clone https://github.com/rubrik-infosec/log4j-detector
+java -jar log4j-detector-2021.12.13.jar 
+
+Usage: java -jar log4j-detector-2021.12.13.jar [--verbose] [paths to scan...]
+
+Exit codes:  0 = No vulnerable Log4J versions found.
+             2 = At least one vulnerable Log4J version found.
+
+About - MergeBase log4j detector (version 2021.12.13)
+Docs  - https://github.com/mergebase/log4j-detector 
+(C) Copyright 2021 Mergebase Software Inc. Licensed to you via GPLv3.
+```
+
+
 # log4j-detector
 Detects log4j versions on your file-system, including deeply recursively nested copies (jars inside jars inside jars).
 Works on Linux, Windows, and Mac, and everywhere else Java runs, too!
@@ -20,28 +36,6 @@ The "!" means the log4j-detector entered a zip archive (e.g., *.zip, *.ear, *.wa
 Note:  the log4j-detector only recursively enters zip archives.  It does not enter tar or gz or bz2, etc. The main reason being that Java systems are often configured to execute jars inside jars, but they are never configured to execute other file formats (that I know of!).  And so a log4j copy inside a *.tar.gz is probably not reachable for a running Java system, and hence, not a vulnerability worth reporting.
 
 2nd note:  for zips-inside-zips our scanner does load the inner-zip completely into memory (using ByteArrayInputStream) before attempting to scan it.  You might need to give Java some extra memory if you have extremely large inner-zips on your system (e.g., 1 GB or larger).
-
-# Usage
-```
-java -jar log4j-detector-2021.12.13.jar 
-
-Usage: java -jar log4j-detector-2021.12.13.jar [--verbose] [paths to scan...]
-
-Exit codes:  0 = No vulnerable Log4J versions found.
-             2 = At least one vulnerable Log4J version found.
-
-About - MergeBase log4j detector (version 2021.12.13)
-Docs  - https://github.com/mergebase/log4j-detector 
-(C) Copyright 2021 Mergebase Software Inc. Licensed to you via GPLv3.
-```
-
-# Build From Source:
-```
-git clone https://github.com/mergebase/log4j-detector.git
-cd log4j-detector/
-mvn install
-java -jar target/log4j-detector-2021.12.13.jar
-```
 
 # License
 GPL version 3.0
